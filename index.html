@@ -1,10 +1,214 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>You May Only Have ONE</title>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+    <style>
+        .bigRed{
+            background-color: red;
+            color: white;
+        }
+        .centered{
+            text-align: center;
+            margin: 10%;
+        }
+
+    </style>
+
 </head>
-<body>
+  <body onload="whenStart()">
+    <div class ="centered">
+    <h1>You can only have one</h1>
+    <p>Coins: <span id="counter"></span></p>
+    <button class="bigRed" id="getcoin">Find a coin</button>
+    <br>
+    <br>
+    <br>
+    <section id="words"></section>
+    <br>
+    <br>
+
+    <button id="wipesave">WIPE SAVE</button>
+
+</div>
+<script>
+// VARIABLES
+var coins;
+
+var rateOfFinding;
+
+var broken;
+// 0 means not broken, 1 means broken
+
+var timeUntilAllowBreak;
+
+var annoyanceScale;
+
+// Custom Functions
+function addElement(tag, text, id) {
+    const para = document.createElement(tag);
+    para.innerHTML = text;
+    document.getElementById(id).appendChild(para);
+}
+
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+  // delay(1000).then(() => CODE );
+  // IN MILLISECONDS aka: 1000 = 1 seconds, 10000 = 10 seconds, etc.
+
+}
+
+// SAVING
+if (localStorage.getItem("coins")){
+    coins = parseInt(localStorage.getItem("coins"))
+} else{
+    coins = 0;
+}
+
+if (localStorage.getItem("rateOfFinding")){
+    rateOfFinding = parseInt(localStorage.getItem("rateOfFinding"))
+} else{
+    rateOfFinding = 1;
+}
+
+if (localStorage.getItem("broken")){
+    broken = parseInt(localStorage.getItem("broken"))
+} else{
+    broken = 0;
+    // or false, not broken
+}
+if (localStorage.getItem("annoyanceScale")){
+    annoyanceScale = parseInt(localStorage.getItem("annoyanceScale"))
+} else{
+    annoyanceScale = 0;
+}
+
+if (localStorage.getItem("timeUntilAllowBreak")){
+    timeUntilAllowBreak = parseInt(localStorage.getItem("timeUntilAllowBreak"))
+} else{
+    timeUntilAllowBreak = 60;
+    
+}
 
 
-</body>
+document.getElementById('getcoin').addEventListener("click", iterate)
+
+document.getElementById('wipesave').addEventListener("click", wipeSave)
+
+document.getElementById("counter").innerHTML = coins
+
+
+
+
+function iterate(){
+    if(coins == 0 || broken == 1){
+    coins += rateOfFinding;
+    localStorage.setItem("coins", coins);
+    console.log("coins = " + coins);
+    document.getElementById("counter").innerHTML = coins;
+    } else{
+        speaking();
+    }
+}
+
+function whenStart(){
+    annoyanceScale = localStorage.getItem("annoyanceScale");
+
+    if(annoyanceScale >= 1){
+        addElement("h2", "HIS Words:", "words")
+        addElement("p", '"You are only allowed one..."', "words");
+
+        if(annoyanceScale >= 2){
+            addElement("p", '"Your Greed disgusts me"', "words");
+
+            if(annoyanceScale >= 3){
+                addElement("p", '"There is no point resisting"', "words")
+
+                if(annoyanceScale >= 4){
+                    addElement("p", '"You ONLY need ONE"', "words")
+
+                    if(annoyanceScale >= 5){
+                        addElement("p", '"ONE"', "words")
+
+                        if(annoyanceScale >= 6){
+                            addElement("p", '"Look, I have billions of other people to deal with, could you cut me a break"', "words")
+                            if(annoyanceScale >= 7){
+                                addElement("p", '"Okay, Stop, It&#39;s getting quite annoying"', "words")
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }else{
+        console.log("Game initialized")
+    }
+     
+}
+
+function speaking(){
+    if(annoyanceScale == 0){
+
+        annoyanceScale = 1;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+    }else if(annoyanceScale == 1){
+        addElement("h2", "HIS Words:", "words")
+        addElement("p", '"You are only allowed one..."', "words")
+        annoyanceScale++;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+
+    }else if(annoyanceScale == 2){
+        addElement("p", '"Your Greed disgusts me"', "words")
+        annoyanceScale++;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+    }else if(annoyanceScale == 3){
+        addElement("p", '"There is no point resisting"', "words")
+        annoyanceScale++;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+    }else if(annoyanceScale == 4){
+        addElement("p", '"You ONLY need ONE"', "words")
+        annoyanceScale++;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+    }else if(annoyanceScale == 5){
+        addElement("p", '"ONE"', "words")
+        annoyanceScale++;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+    }else if(annoyanceScale == 6){
+        addElement("p", '"Look, I have billions of other people to deal with, could you cut me a break"', "words")
+        annoyanceScale++;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+    }else if(annoyanceScale == 7){
+        addElement("p", '"Okay, Stop, It&#39;s getting quite annoying"', "words")
+        annoyanceScale++;
+        console.log("annoyanceScale = " + annoyanceScale);
+        localStorage.setItem("annoyanceScale", annoyanceScale);
+    }
+}
+function wipeSave(){
+    coins = 0;
+    localStorage.setItem("coins", coins);
+    console.log("coins = " + coins);
+    document.getElementById("counter").innerHTML = coins;
+    annoyanceScale = 0;
+    localStorage.setItem("annoyanceScale", annoyanceScale);
+    console.log("annoyanceScale = " + annoyanceScale);
+    location.reload();
+}
+
+
+
+
+
+
+</script>
+  </body>
 </html>
