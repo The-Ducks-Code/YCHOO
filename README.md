@@ -1,2 +1,2 @@
-# ONLY ONE GAME JAM GAME
- the game im making for the only one game jam
+# You Can Have Only One
+ A clicker game with with only ONE file
