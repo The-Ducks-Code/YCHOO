@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "AquariumEvasionNodeless"
+title: "YCHOO"
 ---
-<h2>>AQUARIUMEVASIONNODELESS.EXE</h2>
-<iframe src="https://the-duck.co/AquariumEvasionNodeless/game.html" width="70%" height="600"></iframe>
+<h2>>YCHOO.EXE</h2>
+<iframe src="https://the-duck.co/YCHOO/game.html" width="500" height="500"></iframe>
